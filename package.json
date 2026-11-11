@@ -1,0 +1,53 @@
+{
+  "name": "inksight-nvr",
+  "version": "1.0.0",
+  "license": "AGPL-3.0",
+  "private": false,
+  "description": "Inksight (Project Inksight) - Free Local-First Zero-Cloud 4K NVR & AI Video Management System with Adaptive Dual-Stream Matrix, Direct-to-Disk Recording, Offline YOLO11 AI, and Mobile/SMTP Alerts",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k -n SERVER,CLIENT -c cyan,magenta \"tsx watch --ignore ./bin/** --ignore ./storage/** --ignore ./data/** --ignore ./release/** --ignore ./dist/** --ignore ./.build-tools/** --ignore ./go2rtc.yaml src/server/index.ts\" \"vite\"",
+    "dev:server": "tsx watch --ignore ./bin/** --ignore ./storage/** --ignore ./data/** --ignore ./release/** --ignore ./dist/** --ignore ./.build-tools/** --ignore ./go2rtc.yaml src/server/index.ts",
+    "dev:client": "vite",
+    "build": "vite build && tsc -p tsconfig.server.json",
+    "start": "node dist/server/index.js",
+    "test": "tsx --test tests/aiTracking.test.ts",
+    "package:portable": "powershell -NoProfile -ExecutionPolicy Bypass -File Build-Friend-Package.ps1",
+    "package:installer": "powershell -NoProfile -ExecutionPolicy Bypass -File Build-Exe-Installer.ps1",
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.server.json --noEmit"
+  },
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "chokidar": "^4.0.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "ffmpeg-static": "^5.2.0",
+    "ffprobe-static": "^3.1.0",
+    "framer-motion": "^11.18.2",
+    "lucide-react": "^0.475.0",
+    "nodemailer": "^6.10.0",
+    "onnxruntime-node": "^1.31.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sharp": "^0.33.5",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.4",
+    "@types/nodemailer": "^6.4.17",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@types/ws": "^8.5.14",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "concurrently": "^9.1.2",
+    "postcss": "^8.5.2",
+    "tailwindcss": "^3.4.17",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "vite": "^6.1.0"
+  }
+}

@@ -1,0 +1,24 @@
+# Dependencies & Build Output
+node_modules/
+dist/
+release/
+.build-tools/
+installer/*.ico
+installer/*.exe
+
+# Local NVR Recordings, Alert Snapshots & Clips
+storage/
+
+# Runtime SQLite Database, Prebuilt Binaries & Generated Credentials Config
+data/*.sqlite
+data/*.sqlite-shm
+data/*.sqlite-wal
+go2rtc.yaml
+bin/go2rtc.yaml
+bin/*.exe
+bin/*.onnx
+
+# Environment & Logs
+.env
+.env.*
+*.log

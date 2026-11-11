@@ -1,0 +1,12 @@
+name: Feature Request
+description: Suggest an improvement or new camera preset for Inksight
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: What feature would help you?
+      description: Describe what you'd like to see and how it would make Inksight easier or better.
+    validations:
+      required: true

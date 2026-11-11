@@ -1,0 +1,14 @@
+node_modules
+dist
+release
+.build-tools
+.git
+storage
+data
+go2rtc.yaml
+bin/go2rtc.yaml
+bin/*.exe
+bin/*.onnx
+.env
+.env.*
+*.log

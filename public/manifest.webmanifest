@@ -1,0 +1,17 @@
+{
+  "name": "Inksight — Local 4K AI NVR",
+  "short_name": "Inksight",
+  "description": "Free Local-First 4K Direct-to-Disk NVR & Offline YOLO11 AI Video Management System",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B0F17",
+  "theme_color": "#0B0F17",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

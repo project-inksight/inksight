@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#0B0F17" />
+  <title>Inksight — Free Local 4K AI NVR for Windows</title>
+  <meta
+    name="description"
+    content="100% free, open-source Windows 4K NVR with Direct-to-Disk recording, adaptive WebRTC streaming, and bundled offline YOLO11 AI object detection. Zero cloud fees, zero Docker, zero YAML."
+  />
+  <style>
+    :root {
+      --bg-canvas: #0b0f17;
+      --bg-surface: #111827;
+      --bg-elevated: #0f172a;
+      --border-subtle: #1e293b;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent-emerald: #10b981;
+      --accent-emerald-hover: #34d399;
+      --accent-ink: #052e16;
+      --scrollbar-track: #0b0f17;
+      --scrollbar-thumb: #334155;
+
+      color-scheme: dark;
+      accent-color: var(--accent-emerald);
+      scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+      scrollbar-width: thin;
+    }
+
+    @supports not (scrollbar-color: auto) {
+      ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--scrollbar-thumb);
+        border-radius: 5px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--scrollbar-track);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-canvas);
+      color: var(--text-primary);
+      line-height: 1.6;
+      accent-color: var(--accent-emerald);
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(11, 15, 23, 0.88);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .shield-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: rgba(16, 185, 129, 0.14);
+      border: 1px solid rgba(16, 185, 129, 0.45);
+      display: grid;
+      place-items: center;
+      color: var(--accent-emerald);
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #6ee7b7;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 0.9rem;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .hero {
+      padding: 84px 0 64px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: clamp(2.1rem, 4.8vw, 3.4rem);
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin: 18px 0;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: 0 auto 32px;
+      color: var(--text-secondary);
+      font-size: 1.08rem;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 26px;
+      border-radius: 12px;
+      background: var(--accent-emerald);
+      color: var(--accent-ink);
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 0.98rem;
+      box-shadow: 0 0 28px rgba(16, 185, 129, 0.28);
+      transition: background-color 0.15s ease;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-emerald-hover);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 22px;
+      border-radius: 12px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    .btn-secondary:hover {
+      border-color: #334155;
+    }
+
+    .sub-note {
+      margin-top: 14px;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 20px;
+      margin: 40px 0 68px;
+    }
+
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+      color: var(--text-primary);
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    section h2 {
+      font-size: 1.65rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      background: var(--bg-surface);
+      margin-bottom: 64px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    th {
+      background: var(--bg-elevated);
+      color: #cbd5e1;
+      font-weight: 600;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .faq {
+      margin-bottom: 72px;
+    }
+
+    details {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 12px;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    details p {
+      margin: 10px 0 0;
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 32px 0;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="#" class="brand">
+        <span class="shield-badge" aria-hidden="true">🛡️</span>
+        <span>Inksight</span>
+        <span class="pill">v1.0.0 • Free &amp; Open Source</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#features">Features</a>
+        <a href="#models">YOLO11 AI</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://github.com/project-inksight/inksight">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <span class="pill">100% Local • Zero Cloud Subscriptions • Zero Docker or YAML</span>
+      <h1>Turn Any Windows PC Into a<br />4K AI Security Camera NVR</h1>
+      <p>
+        Install in 60 seconds with one <code>Setup.exe</code>. Discover your RTSP/ONVIF cameras
+        automatically, record 24/7 native 4K video straight to your hard drive with 0% background
+        transcoding, and get offline YOLO11 AI alerts without paying a cent.
+      </p>
+      <div class="cta-row">
+        <a
+          class="btn-primary"
+          href="https://github.com/project-inksight/inksight/releases/latest/download/Inksight-Setup.exe"
+        >
+          <span>⬇ Download Inksight v1.0.0 for Windows (x64)</span>
+        </a>
+        <a class="btn-secondary" href="https://github.com/project-inksight/inksight">
+          <span>View Source on GitHub (AGPL-3.0)</span>
+        </a>
+      </div>
+      <div class="sub-note">
+        Windows 10 / 11 (64-bit) • Includes bundled Node.js, go2rtc, FFmpeg, WinSW Service &amp; Offline YOLO11 Models
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="grid">
+        <div class="card">
+          <h3>⚡ 60-Second Setup.exe</h3>
+          <p>
+            No Docker Desktop, no Linux VM, no Python virtualenvs, and zero config files. Pick your
+            recording drive and scan your network for cameras in two clicks.
+          </p>
+        </div>
+        <div class="card">
+          <h3>🎥 Unobstructed Adaptive 4K Matrix</h3>
+          <p>
+            Smooth sub-stream multi-camera grid with instant native 4K hot-swap on solo/fullscreen.
+            Dedicated header bars never cover your camera view or timestamp.
+          </p>
+        </div>
+        <div class="card">
+          <h3>🧠 Offline YOLO11 + DirectML GPU</h3>
+          <p>
+            Ships with YOLO11 Nano, Small, and Medium models built in. Run on CPU or accelerate on
+            any NVIDIA, AMD, or Intel GPU via Windows DirectML.
+          </p>
+        </div>
+        <div class="card">
+          <h3>🚗 Stationary Car Suppression</h3>
+          <p>
+            Ignores parked cars sitting in your driveway day and night, while firing an instant alert
+            the moment a person walks up or a parked car pulls away.
+          </p>
+        </div>
+        <div class="card">
+          <h3>💾 0% Transcode Direct-to-Disk</h3>
+          <p>
+            Streams raw H.264/H.265 packets straight to MP4 files with circular disk quota cleanup,
+            24/7 pre-login Windows Service operation, and forensic timeline scrubbing.
+          </p>
+        </div>
+        <div class="card">
+          <h3>📲 Instant Phone &amp; Email Alerts</h3>
+          <p>
+            Receive annotated 4K snapshots and MP4 clips via Telegram, Ntfy.sh, Pushover, or SMTP
+            email — with zero monthly cloud fees.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="models">
+      <h2>Bundled Offline YOLO11 Models</h2>
+      <p style="color: var(--text-secondary); margin-top: 0;">
+        Switch live inside Settings → AI Engine to match your PC hardware:
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Size</th>
+              <th>Recommended Hardware &amp; Use Case</th>
+              <th>Inference Speed</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>YOLO11 Nano</strong> (<code>yolo11n</code>)</td>
+              <td>10 MB</td>
+              <td>Mini-PCs (Intel N100/N95), older CPUs, or 8+ camera rigs</td>
+              <td>~35 ms CPU / ~8 ms GPU</td>
+            </tr>
+            <tr>
+              <td><strong>YOLO11 Small</strong> (<code>yolo11s</code> — Default)</td>
+              <td>36 MB</td>
+              <td>Best all-round accuracy for distant cars, pets, and night IR</td>
+              <td>~85 ms CPU / ~14 ms GPU</td>
+            </tr>
+            <tr>
+              <td><strong>YOLO11 Medium</strong> (<code>yolo11m</code>)</td>
+              <td>77 MB</td>
+              <td>Maximum recall on wide 4K street views &amp; partial occlusion</td>
+              <td>~180 ms CPU / ~24 ms GPU</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="faq" class="faq">
+      <h2>Frequently Asked Questions</h2>
+      <details>
+        <summary>Is Inksight really 100% free with no camera limits?</summary>
+        <p>
+          Yes. Inksight is free and open-source software under the AGPL-3.0 license. There are no
+          camera limits, no subscriptions, no cloud accounts, and no telemetry.
+        </p>
+      </details>
+      <details>
+        <summary>Why does Windows show a blue "Windows protected your PC" screen on first install?</summary>
+        <p>
+          Because Inksight is a free open-source community project rather than a paid commercial
+          company spending hundreds of dollars per year on an EV code-signing certificate, Windows
+          SmartScreen displays a standard prompt for new installers. Click <strong>More info</strong>
+          → <strong>Run anyway</strong>. Every release includes a public SHA-256 hash and full source code.
+        </p>
+      </details>
+      <details>
+        <summary>Which cameras work with Inksight?</summary>
+        <p>
+          Any IP camera that supports standard RTSP or ONVIF — including Reolink, Dahua, EmpireTech,
+          Hikvision, Annke, Amcrest, Lorex, TP-Link Tapo, Ubiquiti (RTSP), and generic ONVIF cameras.
+        </p>
+      </details>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      Project Inksight • Released for free under the GNU AGPL-3.0 License • Zero Cloud, 100% Local Privacy
+    </div>
+  </footer>
+</body>
+</html>

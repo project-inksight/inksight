@@ -1,0 +1,15 @@
+services:
+  inksight:
+    build: .
+    container_name: inksight-nvr
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+      - "1984:1984"
+      - "8554:8554"
+    volumes:
+      - ./data:/app/data
+      - ./storage:/app/storage
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
