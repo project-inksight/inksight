@@ -197,6 +197,42 @@
       color: var(--text-secondary);
     }
 
+    .showcase-figure {
+      margin: 40px 0 0;
+      text-align: center;
+    }
+
+    .showcase-secondary {
+      margin: 28px 0 68px;
+    }
+
+    .showcase-frame {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-surface);
+      box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.55),
+        0 0 0 1px rgba(16, 185, 129, 0.14);
+    }
+
+    .showcase-frame img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .showcase-figure figcaption {
+      margin-top: 14px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .section-lead {
+      color: var(--text-secondary);
+      margin-top: 0;
+    }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
@@ -234,7 +270,7 @@
       border: 1px solid var(--border-subtle);
       border-radius: 14px;
       background: var(--bg-surface);
-      margin-bottom: 64px;
+      margin-bottom: 28px;
     }
 
     table {
@@ -331,6 +367,27 @@
       <div class="sub-note">
         Windows 10 / 11 (64-bit) • Includes bundled Node.js, go2rtc, FFmpeg, WinSW Service &amp; Offline YOLO11 Models
       </div>
+      <figure class="showcase-figure">
+        <div class="showcase-frame">
+          <picture>
+            <source
+              type="image/webp"
+              srcset="./screenshots/inksight-live-matrix-1080w.webp 1080w, ./screenshots/inksight-live-matrix-2160w.webp 2160w"
+              sizes="(max-width: 1128px) calc(100vw - 48px), 1032px"
+            />
+            <img
+              src="./screenshots/inksight-live-matrix.png"
+              alt="Inksight v1.0.0 live 2x2 camera matrix showing unobstructed 4K headers, inclusion and exclusion polygon zones, offline YOLO11 person and dog detections, AI Detections sidebar, and 24-hour timeline scrubber"
+              width="2160"
+              height="1242"
+              fetchpriority="high"
+            />
+          </picture>
+        </div>
+        <figcaption>
+          Live 2×2 Adaptive Matrix with polygon inclusion/exclusion zones, stationary-car suppression, offline YOLO11 detections, and 24-hour Direct-to-Disk timeline scrubbing.
+        </figcaption>
+      </figure>
     </section>
 
     <section id="features">
@@ -382,7 +439,7 @@
 
     <section id="models">
       <h2>Bundled Offline YOLO11 Models</h2>
-      <p style="color: var(--text-secondary); margin-top: 0;">
+      <p class="section-lead">
         Switch live inside Settings → AI Engine to match your PC hardware:
       </p>
       <div class="table-wrap">
@@ -417,6 +474,27 @@
           </tbody>
         </table>
       </div>
+      <figure class="showcase-figure showcase-secondary">
+        <div class="showcase-frame">
+          <picture>
+            <source
+              type="image/webp"
+              srcset="./screenshots/inksight-ai-settings-1080w.webp 1080w, ./screenshots/inksight-ai-settings-2160w.webp 2160w"
+              sizes="(max-width: 1128px) calc(100vw - 48px), 1032px"
+            />
+            <img
+              src="./screenshots/inksight-ai-settings.png"
+              alt="Inksight v1.0.0 System Configuration modal showing one-click live switching between bundled offline YOLO11 Nano, Small, and Medium AI models"
+              width="2160"
+              height="1242"
+              loading="lazy"
+            />
+          </picture>
+        </div>
+        <figcaption>
+          One-click live model switching inside Settings → AI &amp; Vision Engine — 100% offline with zero external servers or cloud accounts.
+        </figcaption>
+      </figure>
     </section>
 
     <section id="faq" class="faq">

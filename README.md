@@ -5,7 +5,10 @@
 **Inksight** (by *Project Inksight*) is a native, local-first Windows NVR (Network Video Recorder) and AI Video Management System. Install it in 60 seconds with a single `Setup.exe`, discover your RTSP/ONVIF cameras with one click, record 24/7 native 4K video directly to your hard drive with **0% background video transcoding**, and run **100% offline YOLO11 AI object detection** right out of the box.
 
 [![Download for Windows x64](https://img.shields.io/badge/Download-Inksight__Setup__v1.0.0.exe-10B981?style=for-the-badge&logo=windows)](https://github.com/project-inksight/inksight/releases/latest/download/Inksight-Setup.exe)
+[![Project Website](https://img.shields.io/badge/Website-project--inksight.github.io-1E293B?style=for-the-badge)](https://project-inksight.github.io/inksight/)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-059669?style=for-the-badge)](./LICENSE)
+
+![Inksight v1.0.0 — Unobstructed 4K Adaptive Matrix, Polygon Zones, Offline YOLO11 Detections & 24h Timeline](./docs/screenshots/inksight-live-matrix.png)
 
 ---
 
@@ -44,6 +47,8 @@ Switch models live at any time in **Settings → AI Engine** — no extra downlo
 | **YOLO11 Nano (`yolo11n`)** | `10 MB` | Mini-PCs (Intel N100/N95), older CPUs, or 8+ camera rigs | `~35 ms` CPU / `~8 ms` GPU |
 | **YOLO11 Small (`yolo11s`)** *(Default)* | `36 MB` | Best everyday balance — catches distant driveway cars, pets & night IR | `~85 ms` CPU / `~14 ms` GPU |
 | **YOLO11 Medium (`yolo11m`)** | `77 MB` | Maximum accuracy for wide-angle 4K street views & partial occlusion | `~180 ms` CPU / `~24 ms` GPU |
+
+![Inksight v1.0.0 — Offline YOLO11 Model Selector & AI Vision Engine Settings](./docs/screenshots/inksight-ai-settings.png)
 
 ---
 
